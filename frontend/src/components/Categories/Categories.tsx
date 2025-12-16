@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
 import { getStatistics } from '../../api/api';
 import { useLanguage } from '../../utils/LanguageContext';
+import React from 'react';
+
 
 interface Category {
   name: string;
   count: number;
-  icon: JSX.Element;
+  icon: React.ReactElement;
   gradient: string;
 }
 
@@ -15,7 +17,7 @@ const Categories = () => {
   const [loading, setLoading] = useState(true);
 
   // Define category icons and styles
-  const categoryConfig: { [key: string]: { icon: JSX.Element; gradient: string } } = {
+  const categoryConfig: { [key: string]: { icon: React.ReactElement; gradient: string } } = {
     'Social welfare & Empowerment': {
       icon: (
         <svg className="w-20 h-20 text-orange-600" fill="currentColor" viewBox="0 0 20 20">
