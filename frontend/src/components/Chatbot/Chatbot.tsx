@@ -173,7 +173,7 @@ const Chatbot = ({ isOpen, onClose }: ChatbotProps) => {
     setIsLoading(true);
 
     try {
-      const response = await fetch('http://localhost:8000/api/chatbot/chat', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/chatbot/chat`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
