@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routes import chatbot
+from routes import chatbot, stats
 from database.connection import test_connection
 import os
 
@@ -12,11 +12,13 @@ app = FastAPI(
 
 # CORS - Allow frontend domains
 origins = [
-    "http://localhost:5173",  # Local dev
+    "http://localhost:5173",
     "http://localhost:3000",
-    "https://*.vercel.app",   # Vercel preview/production
-    "https://sahayataai.vercel.app",  # Your production domain
+    "https://sahayataai.vercel.app",
+    "https://sahayataai-*.vercel.app",  # Add this for preview deployments
+    "https://*.vercel.app",
 ]
+
 
 app.add_middleware(
     CORSMiddleware,
@@ -28,6 +30,7 @@ app.add_middleware(
 
 # Include routers
 app.include_router(chatbot.router)
+app.include_router(stats.router)
 
 @app.on_event("startup")
 async def startup_event():
